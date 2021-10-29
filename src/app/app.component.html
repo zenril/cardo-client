@@ -1,0 +1,9 @@
+<ng-container *ngIf="_userService.currentUser$ | async as user; else loggedOut">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #loggedOut>
+  <p><a href="http://localhost:3000/auth/google?redirect={{currentURL}}">login</a></p>
+</ng-template>
+
+<app-dialog></app-dialog>

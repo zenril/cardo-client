@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .c-input_group {
+    @apply flex
+      flex-col
+      mb-5;
+  }
+
+  .c-input {
+    @apply bg-white
+      bg-opacity-10
+      py-3
+      px-2
+      border-b-2
+      border-gray-400
+      focus:border-white
+      text-white
+      font-light
+      placeholder-gray-400
+      outline-none;
+  }
+
+  .c-input-action {
+    @apply text-sm
+      text-blue-400;
+  }
+
+  .c-input--error {
+    @apply border-red;
+  }
+
+  .c-input_description {
+    @apply mt-1
+      text-sm
+      text-white;
+  }
+
+  .c-input_error {
+    @apply mb-1
+      text-red
+      align-bottom
+      text-sm
+      flex
+      items-end
+      font-light;
+  }
+
+  .c-input_label-group {
+    @apply flex
+      justify-between;
+  }
+
+  .c-input_label {
+    @apply text-white
+      inline-block
+      font-light
+      flex
+      items-end
+      gap-x-2
+      mb-1;
+  }
+
+  .c-input-option {
+    @apply text-black;
+  }
+
+  .c-section {
+    @apply flex;
+
+    &--between {
+      @apply justify-between;
+    }
+
+    &--left {
+      @apply justify-start;
+    }
+
+    &--right {
+      @apply justify-end;
+    }
+  }
+
+  .c-submit {
+    @apply border-2
+      border-white
+      focus:border-white
+      p-2
+      rounded
+      text-white;
+
+    &:disabled {
+      @apply border-opacity-30 text-opacity-30;
+    }
+  }
+}

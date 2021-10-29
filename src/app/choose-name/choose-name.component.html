@@ -1,0 +1,38 @@
+<div class="u-drawerbox w-screen">
+  <div class="mx-auto px-4 max-w-screen-md min-h-screen flex flex-col w-full text-white">
+
+    <form class="w-full pb-8 pt-8" (ngSubmit)="submitName($event)" [formGroup]="form">
+
+      <h1 class="">Hi
+        <em>{{userService.getDisplayName()}}</em>, you can change your display name here
+      </h1>
+
+      <div class="c-input_group">
+        <div class="c-input_label-groupa">
+
+          <label class="c-input_label" for="display-name">
+            Who are you?
+          </label>
+          <div class="c-input_error" *ngIf="showError('displayName','required') ">
+            Display name is required
+          </div>
+          <div class="c-input_error" *ngIf="showError('displayName','minlength') as error">
+            Display name must be at least {{error.requiredLength}} characters
+          </div>
+        </div>
+
+        <input class="c-input" id="display-name" name="displayName" type="text" formControlName="displayName"
+          placeholder="The Curator" />
+
+        <div class="c-input_description">
+          So people know who turned a card over
+        </div>
+      </div>
+
+      <div class="c-section c-section--right">
+        <button class="c-submit" [disabled]="form.invalid" type="submit">Use this name</button>
+      </div>
+    </form>
+
+  </div>
+</div>

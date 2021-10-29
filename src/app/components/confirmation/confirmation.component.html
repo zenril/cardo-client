@@ -1,0 +1,19 @@
+<div class="fixed w-screen h-screen top-0 left-0 flex justify-center flex-col content-center items-center">
+
+  <div class="bg-white rounded-lg">
+    <div class="w-96 border-t-8 border-pink-600 rounded-lg flex">
+
+      <div class="w-full pt-2 px-4">
+        <h3 class="font-bold text-pink-700 m-0" *ngIf="data.title" [innerHTML]="data.title"></h3>
+        <p class="pb-2 pt-1 text-sm text-black" *ngIf="data.content" [innerHTML]="data.content"></p>
+      </div>
+    </div>
+
+    <div class="px-4 pb-4 flex space-x-4">
+      <ng-container *ngFor="let button of data.buttons">
+        <button (click)="handleButton(button.label)"
+          class="flex-grow c-submit {{ getButtonStyles(button.type) }}">{{button.label}}</button>
+      </ng-container>
+    </div>
+  </div>
+</div>

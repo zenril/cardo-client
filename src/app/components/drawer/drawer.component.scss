@@ -1,0 +1,93 @@
+.c-drawer {
+  $drawer: &;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  left: 0;
+  right: 0;
+  transition: left 1s, right 1s;
+
+  z-index: 9999;
+
+  @media (min-width: 1024px) {
+    width: 40vw;
+  }
+
+  &__tab {
+    position: absolute;
+    width: 30px;
+  }
+
+  &--left {
+    right: 0;
+    left: -100vw;
+
+    @media (min-width: 1024px) {
+      width: 300px;
+      left: -300px;
+    }
+
+    .c-drawer__tab {
+      right: -30px;
+      top: 5px;
+    }
+
+    &.c-drawer--open {
+      left: 0px;
+      z-index: 10000;
+
+      .c-drawer__tab {
+        &-arrow {
+          transform: rotate(180deg);
+        }
+
+        right: -0px;
+        @media (min-width: 1024px) {
+          right: -30px;
+        }
+      }
+    }
+  }
+
+  &--right {
+    left: auto;
+    right: -100vw;
+
+    @media (min-width: 1024px) {
+      right: -40vw;
+    }
+
+    .c-drawer__tab {
+      left: -30px;
+      top: 5px;
+
+      &-arrow {
+        transform: rotate(180deg);
+      }
+
+      &-label {
+        span {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    &.c-drawer--open {
+      right: 0;
+      z-index: 10000;
+
+      .c-drawer__tab {
+        left: -0px;
+
+        &-arrow {
+          transform: rotate(0deg);
+        }
+
+        @media (min-width: 1024px) {
+          left: -30px;
+        }
+      }
+    }
+  }
+}

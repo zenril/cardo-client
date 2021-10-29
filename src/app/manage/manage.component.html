@@ -1,0 +1,111 @@
+<div class="">
+  <div class="mx-auto px-4 max-w-screen-md min-h-screen flex flex-col w-full text-white pt-8 ">
+    <app-logo-head></app-logo-head>
+
+    <form class="w-full pb-8" (ngSubmit)="createGame($event)" [formGroup]="form">
+      <h1 class="">Hey
+        <a routerLink="/who">{{userService.getDisplayName()}}<app-svgicon name="link" class="h-4 w-4 ml-1">
+          </app-svgicon>
+        </a>, manage your
+        <a routerLink="/decks">decks<app-svgicon name="link" class="h-4 w-4 ml-1"></app-svgicon></a>
+        or create a new game below?
+      </h1>
+      <div class="c-input_group">
+        <div class="c-input_label-group">
+          <label class="c-input_label" for="name">Game Name</label>
+          <div class="c-input_error" *ngIf="showError('name','required') ">
+            Game name is required
+          </div>
+
+          <div class="c-input_error" *ngIf="showError('name','minlength') as error">
+            Name must be at least {{error.requiredLength}} characters
+          </div>
+        </div>
+
+        <input class="c-input" id="name" name="name" type="text" formControlName="name"
+          placeholder="Galactic Cart world" />
+
+
+      </div>
+
+      <ng-container *ngIf="decks$ | async as decks">
+        <div class="c-input_group">
+
+          <div class="c-input_label-group">
+            <label class="c-input_label" for="select-deck">Use this deck</label>
+            <div class="c-input_error" *ngIf="showError('deck','min') as error">
+              Please select a valid option
+            </div>
+          </div>
+
+          <select class="c-input" id="select-deck" formControlName="deck">
+            <option class="c-input-option" [value]="-1" [selected]="true">
+              Select a deck
+            </option>
+
+            <option *ngFor="let deck of decks" class="c-input-option" [value]="deck.id">
+              {{ deck.name | titlecase }}
+            </option>
+          </select>
+
+          <div class="c-input_description">
+            Go to the <a routerLink="/decks">deck manager<app-svgicon name="link" class="h-4 w-4 -mb-1 ml-1">
+              </app-svgicon>
+            </a>
+          </div>
+
+        </div>
+      </ng-container>
+
+      <div class="c-section c-section--right">
+        <button class="c-submit" [disabled]="form.invalid" type="submit">Create</button>
+      </div>
+    </form>
+
+    <h1 class="">
+      Your current games
+    </h1>
+
+    <ng-container *ngIf="games$ | async as games">
+
+      <div class="grid grid-cols-manage gap-2 pb-1 mb-1">
+
+        <div class="-mb-1 col-span-2 md:col-span-1">Name</div>
+        <div class="-mb-1 hidden md:block">Played</div>
+        <div class="-mb-1">Last Played</div>
+
+
+        <div class="col-span-full border-b border-gray-300 "></div>
+
+        <ng-container *ngFor="let game of games">
+
+          <div class="flex flex-col col-span-2 md:col-span-1">
+
+            <div class="flex text-sm ">
+              <div class="text-blue-500 u-action" (click)="handleGameDelete(game)">delete</div>
+              ,&nbsp;<div class="text-sm text-blue-500 u-action" (click)="handleGameShuffle(game)">shuffle</div>
+            </div>
+
+
+            <div class="u-action " (click)="handleGameClick(game)">{{game.name}}<app-svgicon name="link"
+                class="h-4 w-4 -mb-1 ml-1"></app-svgicon>
+            </div>
+          </div>
+
+          <div class="text-sm hidden md:flex items-center">
+            {{ game.stats?.playedCards }} / {{game.stats?.totalCards}}
+          </div>
+
+          <div class="text-sm flex flex-col justify-center">
+            <div>{{ game.stats?.lastUser?.displayName | default: '' }}</div>
+            <div>{{ game.stats?.updatedAt | date: 'd/M/yy, h:mm a': 'en-nz' | default: 'Never' }}</div>
+          </div>
+
+        </ng-container>
+
+      </div>
+    </ng-container>
+
+    <div class="h-1 bg-red my-24"></div>
+  </div>
+</div>

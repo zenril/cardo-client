@@ -1,0 +1,29 @@
+<div class="u-drawerbox w-screen">
+  <div class="mx-auto px-4 max-w-screen-md min-h-screen flex flex-col w-full text-white pt-8">
+    <app-logo-head></app-logo-head>
+    <h1 class="">Hey
+      <a routerLink="/who">{{userService.getDisplayName()}}</a>, create a new
+      <a routerLink="/decks/create">deck</a> or edit an existing one below
+    </h1>
+
+    <ng-container role="list" *ngIf="decks$ | async as decks">
+
+      <div class="grid w-full grid-cols-3 gap-4 border-b border-gray-300 pb-1 mb-1">
+        <div>
+          Name
+        </div>
+        <div>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let deck of decks" role="listitem">
+        <div class="flex justify-between">
+          <div (click)="handleDeckClick(deck)">{{deck.name}}</div>
+          <div (click)="handleDeckDeleteClick(deck)">delete</div>
+        </div>
+      </ng-container>
+
+    </ng-container>
+
+  </div>
+</div>

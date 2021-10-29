@@ -1,0 +1,20 @@
+<div class="c-drawer bg-white flex flex-col c-drawer--{{position}}" [class.c-drawer--open]="open">
+  <div class="
+      c-drawer__tab
+      bg-white
+      text-black-400
+      cursor-pointer
+      pb-1
+      pt-1
+      text-xl
+      flex
+      flex-col
+      items-center
+      justify-center" (click)="handleTab()">
+    <div class="c-drawer__tab-arrow whitespace-nowrap">⤀</div>
+  </div>
+  <div *ngIf="title" class="p-4 ml-4 lg:ml-0">{{title}}</div>
+  <div class="c-drawer__content text-black-400 p-4 overflow-y-scroll ">
+    <ng-content></ng-content>
+  </div>
+</div>

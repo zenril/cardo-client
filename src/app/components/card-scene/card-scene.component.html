@@ -1,0 +1,18 @@
+<div class="scene scene--card">
+  <div class="card-pile">
+    <div class="card__face card__face--back">
+      <img [src]="cardBack(1)" />
+    </div>
+  </div>
+
+  <div class="card {{cardState$ | async}}" (click)="handleCardClick()">
+    <ng-container *ngIf="actualCard$ | async as card">
+      <div class="card__face card__face--front">
+        <app-card name="{{card.name}}" type="{{card.type}}"></app-card>
+      </div>
+    </ng-container>
+    <div class="card__face card__face--back">
+      <img [src]="cardBack(1)" />
+    </div>
+  </div>
+</div>

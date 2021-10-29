@@ -1,0 +1,94 @@
+<div class="u-drawerbox w-screen">
+  <div class="mx-auto px-4 max-w-screen-md min-h-screen flex flex-col items-center justify-start w-full text-white">
+
+
+
+    <form class="w-full pb-8 pt-8 " (ngSubmit)="createDeck()" [formGroup]="form">
+      <h1 class="">Hey
+        <a routerLink="/who">{{userService.getDisplayName()}}</a>,
+        add a deck name and suits below.<br />
+        You can also manage existing <a routerLink="/decks">decks</a> or <a routerLink="/games">games</a>.
+      </h1>
+
+
+      <div class="c-input_group">
+        <div class="c-input_label-group">
+          <label class="c-input_label" for="name">Deck Name</label>
+          <div class="c-input_error" *ngIf="showError('name','required') ">
+            Deck name is required
+          </div>
+
+          <div class="c-input_error" *ngIf="showError('name','minlength') as error">
+            Deck Name must be at least {{error.requiredLength}} characters
+          </div>
+        </div>
+
+        <input class="c-input" id="name" name="name" type="text" formControlName="name"
+          placeholder="Galactic Cart world" />
+
+        <div class="c-input_description">
+          This is the description
+        </div>
+      </div>
+
+      <div class="c-input_group">
+        <label class="c-input_label" for="select-deck">Add a new suit</label>
+        <select class="c-input" id="select-deck" (change)="handleSelect($event)">
+          <option class="c-input-option" [value]="">
+            Select A suit
+          </option>
+          <option *ngFor="let suit of getSuits()" class="c-input-option" [value]="suit">
+            {{suit | titlecase}}
+          </option>
+        </select>
+      </div>
+
+      <ng-container *ngIf="getDeckSuits() as suits">
+        <div class="mb-4">
+          Add comma separated cards 1-13, A-Z or a-z to a suit i.e <code>A,1,2,3,4,5</code>
+        </div>
+        <div *ngFor="let suit of suits">
+          <ng-container *ngIf="getSuitControl(suit.suit) as suitControl">
+            <div class="c-input_group" [class.s-error]="suitControl.invalid">
+              <div class="c-input_label-group">
+                <label class="c-input_label" for="select-deck">
+                  {{suit.suit | titlecase}}
+                  <span (click)="removeSuit(suit.suit)" class="u-action text-blue-500 text-xs">remove
+                  </span>
+                </label>
+
+                <div class="c-input_error"
+                  *ngIf="showError(suitControl, 'cardsInvalid') && !showError(suitControl, 'required')">
+                  Incorrect card pattern
+                </div>
+
+                <div class="c-input_error" *ngIf="showError(suitControl, 'required')">
+                  Cards for {{suit.suit | titlecase}} are required.
+                </div>
+              </div>
+
+              <div class="flex w-100">
+                <textarea class="c-input flex-grow min-h-12" placeholder="eg. 1,2,3,4,5,k,q,j,k"
+                  [formControl]="getSuitControl(suit.suit)"></textarea>
+                <div class="bg-white bg-opacity-100 py-2 px-1">
+                  <app-svgicon [name]="suit.suit" class="w-12 h-12"></app-svgicon>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <div class="c-section c-section--right">
+        <button *ngIf="isCreating" class="c-submit" [disabled]="form.invalid" type="submit">Create</button>
+        <button *ngIf="isEditing" class="c-submit" [disabled]="form.invalid" type="submit">
+
+
+          Sav{{ (saving$ | async) ? 'ing' : 'e' }}
+
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="desk u-drawerbox" *ngIf="gameService.game$ | async as game">
+  <app-drawer>
+    <a href="http://localhost:3000/auth/logout">logout</a>
+    <div>{{game.name}}</div>
+    <div>{{game.deck}}</div>
+    <div>{{userService.currentUser?.email}}</div>
+  </app-drawer>
+
+
+  <div class="surface" *ngIf="game.open && (lastFlipped$ | async)?.name != '';else finished">
+    <app-card-scene [currentCard$]="lastFlipped$" [socketCard$]="gameSocket.latestCard$"
+      [initialCard]="playedCards$.value[0]" (handleNewCard)="flip(game)">
+    </app-card-scene>
+  </div>
+
+  <ng-template #finished>
+    <div class="surface">
+      <img class="ending" src="/assets/ending.svg" />
+    </div>
+  </ng-template>
+
+  <app-drawer position="right" title="Played Cards">
+    <ng-container role="list" *ngIf="playedCards$ | async as cards">
+      <div class="flex  " *ngFor="let played of cards.sort(sortByDate); index as i;" role="listitem">
+        <div class="pb-2 pt-2">
+          <div class="bg-white flex w-16 align items-center justify-between pl-3 pr-1 mr-2 text-black rounded-lg">
+            <div class="flex">
+              {{played.name | uppercase}}
+            </div>
+
+            <svg class="w-8 h-8">
+              <use [attr.xlink:href]="getSuitLink(played.type)"></use>
+            </svg>
+          </div>
+        </div>
+
+        <div class="flex-grow border-t pb-2 pt-2">
+          <div>
+            {{ played.user?.displayName }}
+          </div>
+          <div class="text-sm">
+            {{ played.played | date: 'd/M/yy, h:mm a': 'en-nz'}}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </app-drawer>
+
+</div>

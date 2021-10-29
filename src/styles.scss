@@ -1,0 +1,111 @@
+@use "~@angular/material" as mat;
+
+@import "./styles/components.scss";
+
+html {
+  background-color: #333333;
+  background-image: radial-gradient(
+      rgba(0, 0, 0, 20%),
+      rgba(0, 0, 0, 55%),
+      rgba(0, 0, 0, 80%)
+    ),
+    repeating-linear-gradient(
+      62deg,
+      hsl(0, 0%, 16%),
+      hsl(0, 0%, 16%) 2px,
+      transparent 0px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      -62deg,
+      hsl(0, 0%, 16%),
+      hsl(0, 0%, 16%) 2px,
+      transparent 0px,
+      transparent 60px
+    );
+}
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  background-size: auto 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-size: 18px;
+}
+
+h1 {
+  font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+h2 {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+h3 {
+  font: 400 16px/28px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+h4 {
+  font: 400 15px/24px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+h5 {
+  font: 400 calc(14px * 0.83) / 20px Roboto, "Helvetica Neue", sans-serif;
+  margin: 0 0 12px;
+}
+
+h6 {
+  font: 400 calc(14px * 0.67) / 20px Roboto, "Helvetica Neue", sans-serif;
+  margin: 0 0 12px;
+}
+
+.u-drawerbox {
+  width: 100vw;
+  transition: width 1s, margin-left 1s;
+}
+
+@media (min-width: 1024px) {
+  body.u-drawer--right {
+    .u-drawerbox {
+      width: 60vw;
+    }
+  }
+
+  body.u-drawer--left {
+    .u-drawerbox {
+      width: calc(100vw - 300px);
+      margin-left: 300px;
+    }
+  }
+}
+
+.u-action,
+a[routerlink] {
+  text-decoration: underline;
+  cursor: pointer;
+
+  svg {
+    fill: #ffffff;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+a[routerlink] {
+  color: #ff0000;
+
+  svg {
+    fill: #ff0000;
+  }
+}

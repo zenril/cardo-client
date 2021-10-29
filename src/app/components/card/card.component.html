@@ -1,0 +1,56 @@
+<div class="card" [class.letter]="isLetter()" [class.number]="isNumber()" [class.single]="isSingle() || isZero()"
+  [class.zero]="isZero()">
+  <div class="card-inner">
+    <div class="left">
+      <div class="number-wrap">
+        <svg viewBox="0 0 15 18">
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
+            {{ getName() }}
+          </text>
+        </svg>
+      </div>
+      <div class="number-pip">
+        <svg>
+          <use [attr.xlink:href]="getSuitLink()"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="pips">
+      <div *ngFor="let pip of getPips()" class="item pip-{{ pip }}">
+
+
+        <div class="circle" *ngIf="pip != 'name'">
+          <svg>
+            <use [attr.xlink:href]="getSuitLink()"></use>
+          </svg>
+        </div>
+
+
+        <div class="circle" *ngIf="pip == 'name'">
+          <div class="number-wrap">
+            <svg viewBox="0 0 15 16">
+              <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle">{{getName()}}</text>
+            </svg>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+    <div class="right">
+      <div class="number-wrap">
+        <svg viewBox="0 0 15 18">
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">
+            {{ getName() }}
+          </text>
+        </svg>
+      </div>
+      <div class="number-pip">
+        <svg>
+          <use [attr.xlink:href]="getSuitLink()"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
