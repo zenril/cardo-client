@@ -38,6 +38,7 @@ import {
 } from './components/dialog/dialog.component';
 import { LogoHeadComponent } from './components/logo-head/logo-head.component';
 import { DefaultPipe } from './pipes/default.pipe';
+import { EnvPipe } from './pipes/env.pipe';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { DefaultPipe } from './pipes/default.pipe';
     DialogComponent,
     LogoHeadComponent,
     DefaultPipe,
+    EnvPipe,
   ],
   imports: [
     MatIconModule,

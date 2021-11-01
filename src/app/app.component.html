@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-template #loggedOut>
-  <p><a href="http://localhost:3000/auth/google?redirect={{currentURL}}">login</a></p>
+  <p><a href="{{ 'api' | env }}/auth/google?redirect={{currentURL}}">login</a></p>
 </ng-template>
 
 <app-dialog></app-dialog>

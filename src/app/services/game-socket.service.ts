@@ -5,6 +5,7 @@ import { Card, Game } from './types';
 import { io, Manager, Socket } from 'socket.io-client';
 import { UserService } from './user.service';
 import { ThrowStmt } from '@angular/compiler';
+import { environment } from 'src/environments/environment';
 
 export enum SceneState {
   initial = 'initial',
@@ -48,9 +49,8 @@ export class GameSocketService {
       if (this.socket) {
         this.socket.disconnect();
       }
-      // const manager = new Manager('http://localhost:3000', {});
-      // const socket = manager.socket(`${game.uuid}`);
-      this.socket = io(`http://localhost:3000`, {
+
+      this.socket = io(environment.api, {
         query: {
           room: game.uuid,
         },

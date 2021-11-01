@@ -1,6 +1,6 @@
 <div class="desk u-drawerbox" *ngIf="gameService.game$ | async as game">
   <app-drawer>
-    <a href="http://localhost:3000/auth/logout">logout</a>
+    <a href="{{ 'api' | env }}/auth/logout">logout</a>
     <div>{{game.name}}</div>
     <div>{{game.deck}}</div>
     <div>{{userService.currentUser?.email}}</div>
